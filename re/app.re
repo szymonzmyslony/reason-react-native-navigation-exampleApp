@@ -4,17 +4,15 @@ type screen =
   | Login
   | MainScreen int;
 
-let compare a b =>
-  switch (a, b) {
-  | (MainScreen a, MainScreen b) => a == b
-  | (Login, Login) => true
-  | _ => false
-  };
-
 module StackNavigator =
   StackNavigator.Make {
     type navigationState = screen;
-    let compare = compare;
+  };
+
+module StatefullStackNavigator =
+  StatefullStackNavigator.Make {
+    type navigationState = screen;
+    let initialScreen = Login;
   };
 
 type action =
@@ -30,12 +28,13 @@ type state = {
 
 let component = ReasonReact.reducerComponent "App";
 
-let renderScreen ::count ::increment ::decrement push::(push: screen => unit) screen =>
+let renderScreen ::count ::increment ::decrement push screen =>
   switch screen {
   | MainScreen a =>
     <View>
-      (Login.render ::increment ::decrement goToMainScreen::(fun _ => push (MainScreen count)))
       <Text value=(string_of_int a) />
+      <TouchableHighlight onPress=increment> <Text value="Increment" /> </TouchableHighlight>
+      <TouchableHighlight onPress=decrement> <Text value="Decrement" /> </TouchableHighlight>
     </View>
   | Login =>
     Login.render ::increment ::decrement goToMainScreen::(fun _ => push (MainScreen count))
@@ -64,16 +63,13 @@ let make _children => {
     },
   render: fun {state, reduce} =>
     ReasonReact.element @@
-    StackNavigator.make
-      navigationState::state.navigationState
-      goBack::(reduce (fun _ => Pop))
+    StatefullStackNavigator.make
       getHeaderConfig::headerTitle
       render::(
         renderScreen
           count::state.count
           increment::(reduce (fun _ => Increment))
           decrement::(reduce (fun _ => Decrement))
-          push::(reduce (fun e => Push e))
       )
 };
 

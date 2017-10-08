@@ -28,9 +28,14 @@ rule build_cmj_cmi
 build ./reason-react-native-navigation/src/header.cmj |  $src_root_dir/lib/js/./reason-react-native-navigation/src/header.js ./reason-react-native-navigation/src/header.cmi : build_cmj_cmi ./reason-react-native-navigation/src/header.mlast
   bsc_flags = $bsc_flags -bs-re-error -bs-super-errors
   bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/./reason-react-native-navigation/src
-build ./reason-react-native-navigation/src/StackNavigator.mlast : build_ast_and_module_sets_from_re $src_root_dir/./reason-react-native-navigation/src/StackNavigator.re
-build ./reason-react-native-navigation/src/StackNavigator.mlast.d : build_deps ./reason-react-native-navigation/src/StackNavigator.mlast
-build ./reason-react-native-navigation/src/StackNavigator.cmj |  $src_root_dir/lib/js/./reason-react-native-navigation/src/StackNavigator.js ./reason-react-native-navigation/src/StackNavigator.cmi : build_cmj_cmi ./reason-react-native-navigation/src/StackNavigator.mlast
+build ./reason-react-native-navigation/src/stackNavigator.mlast : build_ast_and_module_sets_from_re $src_root_dir/./reason-react-native-navigation/src/stackNavigator.re
+build ./reason-react-native-navigation/src/stackNavigator.mlast.d : build_deps ./reason-react-native-navigation/src/stackNavigator.mlast
+build ./reason-react-native-navigation/src/stackNavigator.cmj |  $src_root_dir/lib/js/./reason-react-native-navigation/src/stackNavigator.js ./reason-react-native-navigation/src/stackNavigator.cmi : build_cmj_cmi ./reason-react-native-navigation/src/stackNavigator.mlast
+  bsc_flags = $bsc_flags -bs-re-error -bs-super-errors
+  bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/./reason-react-native-navigation/src
+build ./reason-react-native-navigation/src/statefullStackNavigator.mlast : build_ast_and_module_sets_from_re $src_root_dir/./reason-react-native-navigation/src/statefullStackNavigator.re
+build ./reason-react-native-navigation/src/statefullStackNavigator.mlast.d : build_deps ./reason-react-native-navigation/src/statefullStackNavigator.mlast
+build ./reason-react-native-navigation/src/statefullStackNavigator.cmj |  $src_root_dir/lib/js/./reason-react-native-navigation/src/statefullStackNavigator.js ./reason-react-native-navigation/src/statefullStackNavigator.cmi : build_cmj_cmi ./reason-react-native-navigation/src/statefullStackNavigator.mlast
   bsc_flags = $bsc_flags -bs-re-error -bs-super-errors
   bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/./reason-react-native-navigation/src
 build re/app.mlast : build_ast_and_module_sets_from_re $src_root_dir/re/app.re
@@ -43,4 +48,4 @@ build re/login.mlast.d : build_deps re/login.mlast
 build re/login.cmj |  $src_root_dir/lib/js/re/login.js re/login.cmi : build_cmj_cmi re/login.mlast
   bsc_flags = $bsc_flags -bs-re-error -bs-super-errors
   bs_package_flags = $bs_package_flags  -bs-package-output commonjs:lib/js/re
-build build.ninja : phony  ||  re/login.mlast.d re/app.mlast.d ./reason-react-native-navigation/src/StackNavigator.mlast.d ./reason-react-native-navigation/src/header.mlast.d
+build build.ninja : phony  ||  re/login.mlast.d re/app.mlast.d ./reason-react-native-navigation/src/statefullStackNavigator.mlast.d ./reason-react-native-navigation/src/stackNavigator.mlast.d ./reason-react-native-navigation/src/header.mlast.d
