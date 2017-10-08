@@ -4,11 +4,6 @@ type screen =
   | Login
   | MainScreen int;
 
-module StackNavigator =
-  StackNavigator.Make {
-    type navigationState = screen;
-  };
-
 module StatefullStackNavigator =
   StatefullStackNavigator.Make {
     type navigationState = screen;
@@ -16,8 +11,6 @@ module StatefullStackNavigator =
   };
 
 type action =
-  | Pop
-  | Push screen
   | Increment
   | Decrement;
 
@@ -53,13 +46,6 @@ let make _children => {
     switch action {
     | Increment => ReasonReact.Update {...state, count: state.count + 1}
     | Decrement => ReasonReact.Update {...state, count: state.count - 1}
-    | Pop =>
-      switch state.navigationState {
-      | [_h, ...tail] => ReasonReact.Update {...state, navigationState: tail}
-      | _ => ReasonReact.NoUpdate
-      }
-    | Push screen =>
-      ReasonReact.Update {...state, navigationState: [screen, ...state.navigationState]}
     },
   render: fun {state, reduce} =>
     ReasonReact.element @@

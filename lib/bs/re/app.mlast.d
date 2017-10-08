@@ -1,1 +1,1 @@
-re/app.cmj : re/login.cmj ./reason-react-native-navigation/src/stackNavigator.cmj ./reason-react-native-navigation/src/statefullStackNavigator.cmj
+re/app.cmj : re/login.cmj ./reason-react-native-navigation/src/statefullStackNavigator.cmj
