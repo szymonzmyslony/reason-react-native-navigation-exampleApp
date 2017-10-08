@@ -1,0 +1,3 @@
+[submodule "reason-react-native-navigation"]
+	path = reason-react-native-navigation
+	url = https://github.com/szymonzmyslony/reason-react-native-navigation
